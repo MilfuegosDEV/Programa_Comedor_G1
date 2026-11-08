@@ -10,7 +10,7 @@ $usarTablas = true;
 $platillos = [
     1 => ['nombre' => 'Arroz con pollo'],
     2 => ['nombre' => 'Ensalada César'],
-    3 => ['nombre' => 'Sopa de verduras'],
+    3 => ['nombre' => 'Sopa '],
     4 => ['nombre' => 'Pechuga de pollo a la plancha'],
     5 => ['nombre' => 'Pasta Alfredo'],
     6 => ['nombre' => 'Carne asada'],
@@ -20,9 +20,9 @@ $platillos = [
     10 => ['nombre' => 'Hamburguesa clásica'],
     11 => ['nombre' => 'Pescado frito'],
     12 => ['nombre' => 'Lasaña de carne'],
-    13 => ['nombre' => 'Quiche de espinacas'],
+    13 => ['nombre' => 'Empanada de papa'],
     14 => ['nombre' => 'Ensalada de frutas'],
-    15 => ['nombre' => 'Chiles rellenos'],
+    15 => ['nombre' => 'Empanada de queso'],
 ];
 
 /* Funciones auxiliares */
