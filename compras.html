@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras y proveedores</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+    <h1>Comedores Estudiantiles</h1>
+
+    <!-- Menú compartido,favor copiar este bloque en todas las páginas -->
+    <div id="menu">
+        <a href="beneficiarios.html">Beneficiarios</a>
+        <a href="menus.html">Menús</a>
+        <a href="inventario.html">Inventario</a>
+        <a href="compras.html">Compras</a>
+        <a href="raciones.html">Raciones servidas</a>
+        <a href="reportes.html">Reportes</a>
+        <a href="login.html">Cerrar sesión</a>
+    </div>
+
+    <!-- Proveedores -->
+    <div class="tarjeta">
+        <h2>Registrar proveedor</h2>
+
+        <label>Nombre del proveedor</label>
+        <br>
+        <input type="text" id="nombre-proveedor">
+        <br>
+
+        <label>Teléfono máximo 8 dígitos</label>
+        <br>
+        <input type="text" id="telefono-proveedor" maxlength="8">
+        <br>
+
+        <button onclick="registrarProveedor()">Guardar proveedor</button>
+
+        <p id="mensaje-proveedor" class="mensaje"></p>
+    </div>
+
+    <div class="tarjeta tarjeta-ancha">
+        <h2>Proveedores registrados</h2>
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-proveedores"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Registro de compras -->
+    <div class="tarjeta tarjeta-ancha">
+        <h2>Registrar compra</h2>
+
+        <label>Proveedor</label>
+        <br>
+        <select id="proveedor"></select>
+        <br>
+
+        <label>Fecha de la compra</label>
+        <br>
+        <input type="date" id="fecha-compra">
+        <br>
+
+        <h2>Productos de la compra</h2>
+
+        <label>Producto</label>
+        <br>
+        <select id="producto-compra"></select>
+        <br>
+
+        <label>Cantidad</label>
+        <br>
+        <input type="number" id="cantidad-compra" min="0" step="0.01">
+        <br>
+
+        <label>Costo unitario (₡)</label>
+        <br>
+        <input type="number" id="precio-compra" min="0" step="0.01">
+        <br>
+
+        <button onclick="agregarDetalle()">Agregar producto</button>
+
+        <p id="mensaje-detalle" class="mensaje"></p>
+
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Costo unitario</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-detalle"></tbody>
+            </table>
+        </div>
+
+        <p><strong>Total de la compra: <span id="total-compra">₡0,00</span></strong></p>
+
+        <button onclick="guardarCompra()">Guardar compra</button>
+
+        <p id="mensaje-compra" class="mensaje"></p>
+    </div>
+
+    <!-- Historial -->
+    <div class="tarjeta tarjeta-ancha">
+        <h2>Compras registradas</h2>
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Proveedor</th>
+                        <th>Productos</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-compras"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="datos-ejemplo.js"></script>
+    <script src="compras.js"></script>
+</body>
+
+</html>
