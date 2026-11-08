@@ -1,6 +1,4 @@
 // Datos de ejemplo para los módulos de Inventario y Compras.
-// Más adelante se reemplazarán por consultas a PHP/MySQL (fetch).
-// Los nombres de los campos coinciden con el diagrama relacional.
 
 function formatoFecha(fecha){
     let anio = fecha.getFullYear();

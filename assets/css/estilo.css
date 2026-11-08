@@ -1,6 +1,5 @@
 /* =====================================================================
    Comedores Estudiantiles - Estilos compartidos
-   Se mantienen los mismos nombres de clases e ids que usan las páginas:
    #menu, .tarjeta, .tarjeta-ancha, .tabla-contenedor, .estado-ok,
    .estado-alerta, .mensaje, .mensaje.exito y #mensaje.
    ===================================================================== */
@@ -108,7 +107,7 @@ p{
 }
 
 /* Páginas sin menú (login): separación entre el título y la tarjeta */
-h1 + .tarjeta{
+h1 + main > .tarjeta:first-child{
     margin-top: 40px;
 }
 
@@ -350,5 +349,220 @@ tbody tr:hover{
         padding: 8px;
         font-size: 14px;
         white-space: nowrap; /* la tabla se desplaza de lado en vez de partir el texto */
+    }
+}
+
+/* =====================================================================
+   10. Elementos agregados con la estructura PHP
+   ===================================================================== */
+
+/* Enlace del menú de la página actual */
+#menu a.activo{
+    border-bottom-color: var(--amarillo);
+    color: var(--amarillo);
+}
+
+/* Pie de página */
+.pie{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--texto-suave);
+}
+
+.pie p{
+    color: var(--texto-suave);
+}
+
+/* Texto de ayuda pequeño */
+.ayuda{
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: var(--texto-suave);
+}
+
+/* Botón secundario (blanco con borde azul) */
+.boton-secundario{
+    background-color: var(--blanco);
+    color: var(--azul);
+}
+
+.boton-secundario:hover{
+    background-color: var(--azul-claro);
+}
+
+/* Enlace con aspecto de botón */
+a.boton{
+    display: inline-block;
+    margin: 15px 0 0;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background-color: var(--azul);
+    color: var(--blanco);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+a.boton:hover{
+    background-color: var(--azul-oscuro);
+}
+
+/* Encabezado de tarjeta con título a la izquierda y botones a la derecha */
+.tarjeta__encabezado{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.tarjeta__encabezado button,
+.tarjeta__encabezado a.boton{
+    margin: 0 0 0 8px;
+}
+
+h3{
+    margin: 25px 0 10px;
+    color: var(--azul);
+    font-size: 17px;
+}
+
+/* ---------- Reportes ---------- */
+
+/* Filtros en una fila */
+.filtros{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 15px;
+    align-items: end;
+}
+
+.filtros input,
+.filtros select{
+    max-width: none;
+}
+
+.filtros__botones{
+    display: flex;
+    gap: 8px;
+}
+
+.filtros__botones button{
+    margin: 5px 0;
+    white-space: nowrap;
+}
+
+/* Totales del reporte */
+.resumen{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 15px;
+}
+
+.resumen div{
+    padding: 8px 14px;
+    border-left: 4px solid var(--amarillo);
+    border-radius: 6px;
+    background-color: var(--azul-claro);
+}
+
+.resumen dt{
+    font-size: 12px;
+    color: var(--texto-suave);
+}
+
+.resumen dd{
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--azul);
+}
+
+/* Vista del reporte en texto */
+.reporte-texto{
+    margin: 15px 0 0;
+    padding: 15px;
+    overflow-x: auto;
+    border-radius: 6px;
+    background-color: #12163d;
+    color: #e9ebf8;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+/* Columnas numéricas alineadas a la derecha */
+th.num,
+td.num{
+    text-align: right;
+}
+
+/* ---------- Ajustes de DataTables ---------- */
+div.dt-container{
+    margin-top: 5px;
+}
+
+div.dt-container .dt-search input,
+div.dt-container .dt-length select{
+    width: auto;
+    margin: 0 0 0 5px;
+    padding: 6px 10px;
+}
+
+div.dt-container .dt-info,
+div.dt-container .dt-search label,
+div.dt-container .dt-length label{
+    font-size: 13px;
+    color: var(--texto-suave);
+}
+
+div.dt-container .dt-paging .dt-paging-button.current,
+div.dt-container .dt-paging .dt-paging-button.current:hover{
+    border-color: var(--azul);
+    background: var(--azul);
+    color: var(--blanco) !important; /* DataTables usa !important en este color */
+}
+
+/* DataTables alinea a la derecha lo que detecta como número o fecha;
+   aquí solo se alinean a la derecha las columnas con la clase .num */
+table.dataTable th:not(.num),
+table.dataTable td:not(.num){
+    text-align: left;
+}
+
+table.dataTable th:not(.num) div.dt-column-header{
+    flex-direction: row;
+}
+
+/* DataTables pone su propio borde en las tablas; se deja el del contenedor */
+.tabla-contenedor table.dataTable{
+    border: none;
+}
+
+/* La tabla de DataTables va dentro de su propio contenedor */
+.tabla-contenedor:has(.dt-container){
+    padding: 10px;
+}
+
+@media (max-width: 768px){
+    .filtros{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .filtros > div:first-child,
+    .filtros__botones{
+        grid-column: 1 / -1;
+    }
+
+    .filtros__botones{
+        flex-direction: column-reverse;
+    }
+
+    .tarjeta__encabezado button,
+    .tarjeta__encabezado a.boton{
+        width: 100%;
+        margin: 8px 0 0;
+        text-align: center;
     }
 }
