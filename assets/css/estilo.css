@@ -1,0 +1,568 @@
+/* =====================================================================
+   Comedores Estudiantiles - Estilos compartidos
+   #menu, .tarjeta, .tarjeta-ancha, .tabla-contenedor, .estado-ok,
+   .estado-alerta, .mensaje, .mensaje.exito y #mensaje.
+   ===================================================================== */
+
+/* ---------- 1. Colores y medidas (cambiar aquí para todo el sitio) ----------
+   Paleta tomada del Campus Virtual de la Universidad Fidélitas */
+:root{
+    --azul-barra: #000f9f;     /* barra superior */
+    --azul: #2b338c;           /* títulos, enlaces y botones */
+    --azul-oscuro: #1f2670;    /* botones al pasar el mouse */
+    --azul-claro: #eaebf4;     /* encabezados de tabla y fondos suaves */
+    --amarillo: #ffc107;       /* acento: menú activo y foco */
+    --amarillo-claro: #fff4d1;
+    --verde: #1e7b46;          /* estado correcto */
+    --rojo: #b42318;           /* alertas y errores */
+    --rojo-claro: #fdecea;
+    --texto: #1f2440;
+    --texto-suave: #5c6584;
+    --borde: #dee2e7;
+    --fondo: #f1f4f5;
+    --blanco: #ffffff;
+    --radio: 8px;
+    --sombra: 0 2px 8px rgba(43, 51, 140, 0.08);
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Roboto", Arial, sans-serif;
+    color: var(--texto);
+    background-color: var(--fondo);
+    margin: 0;
+    padding: 0 0 40px;
+    line-height: 1.5;
+}
+
+h1{
+    margin: 0;
+    padding: 20px 15px 10px;
+    background-color: var(--azul-barra);
+    color: var(--blanco);
+    font-size: 28px;
+    text-align: center;
+}
+
+h2{
+    margin: 0 0 15px;
+    color: var(--azul);
+    font-size: 22px;
+}
+
+p{
+    color: var(--texto);
+}
+
+/* ---------- 3. Menú de navegación compartido ---------- */
+#menu{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin: 0 0 30px;
+    padding: 0 15px;
+    background-color: var(--azul-barra);
+    box-shadow: var(--sombra);
+}
+
+#menu a{
+    padding: 12px 14px 10px;
+    border-bottom: 3px solid transparent;
+    color: var(--blanco);
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/* Subrayado amarillo como en el campus */
+#menu a:hover,
+#menu a:focus{
+    border-bottom-color: var(--amarillo);
+    color: var(--amarillo);
+    outline: none;
+}
+
+/* Último enlace del menú = Cerrar sesión */
+#menu a:last-child{
+    color: #ffd6d3;
+}
+
+/* ---------- 4. Tarjetas (contenedores de cada sección) ---------- */
+.tarjeta{
+    width: 40%;
+    margin: 0 auto 25px;
+    padding: 25px;
+    background-color: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    text-align: left;
+}
+
+/* Páginas sin menú (login): separación entre el título y la tarjeta */
+h1 + main > .tarjeta:first-child{
+    margin-top: 40px;
+}
+
+/* Tarjeta más ancha para tablas */
+.tarjeta-ancha{
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* En tarjetas anchas los campos no se estiran a todo el ancho */
+.tarjeta-ancha input,
+.tarjeta-ancha select{
+    max-width: 480px;
+}
+
+/* Títulos dentro de una tarjeta que no son el primero (ej. "Productos de la compra") */
+.tarjeta h2:not(:first-child){
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--borde);
+    font-size: 18px;
+}
+
+/* ---------- 5. Formularios ---------- */
+label{
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--azul);
+}
+
+input,
+select{
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px 12px;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    background-color: var(--blanco);
+    color: var(--texto);
+    font-family: inherit;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus{
+    border-color: var(--azul);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--amarillo-claro);
+}
+
+button{
+    margin: 15px 10px 0 0;
+    padding: 10px 20px;
+    border: 1px solid var(--azul);
+    border-radius: 6px;
+    background-color: var(--azul);
+    color: var(--blanco);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: var(--azul-oscuro);
+}
+
+button:focus-visible{
+    outline: 3px solid var(--amarillo);
+    outline-offset: 2px;
+}
+
+/* Botones pequeños dentro de tablas (ej. "Quitar") */
+td button{
+    margin: 0;
+    padding: 5px 12px;
+    border-color: var(--rojo);
+    background-color: var(--blanco);
+    color: var(--rojo);
+    font-size: 14px;
+}
+
+td button:hover{
+    background-color: var(--rojo-claro);
+}
+
+/* ---------- 6. Tablas ---------- */
+.tabla-contenedor{
+    overflow-x: auto;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+}
+
+/* Tabla que va después de un botón (ej. detalle de la compra) */
+button ~ .tabla-contenedor{
+    margin-top: 20px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-contenedor + p,
+table + p{
+    margin-top: 15px;
+}
+
+th,
+td{
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--borde);
+    text-align: left;
+}
+
+th{
+    background-color: var(--azul-claro);
+    color: var(--azul);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+tbody tr:last-child td{
+    border-bottom: none;
+}
+
+tbody tr:nth-child(even){
+    background-color: #f8f9fc;
+}
+
+tbody tr:hover{
+    background-color: var(--amarillo-claro);
+}
+
+/* ---------- 7. Estados y alertas ---------- */
+.estado-ok{
+    color: var(--verde);
+    font-weight: bold;
+}
+
+.estado-alerta{
+    color: var(--rojo);
+    font-weight: bold;
+}
+
+/* Lista de alertas de inventario */
+#lista-alertas{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#lista-alertas li{
+    margin-bottom: 8px;
+    padding: 10px 14px;
+    border-left: 4px solid var(--verde);
+    border-radius: 6px;
+    background-color: #e7f5ec;
+}
+
+#lista-alertas li.estado-alerta{
+    border-left-color: var(--rojo);
+    background-color: var(--rojo-claro);
+}
+
+/* ---------- 8. Mensajes de validación ---------- */
+#mensaje,
+.mensaje{
+    min-height: 1.5em;
+    margin: 10px 0 0;
+    color: var(--rojo);
+    font-weight: 500;
+}
+
+.mensaje.exito{
+    color: var(--verde);
+}
+
+/* Si el mensaje está vacío no ocupa espacio */
+#mensaje:empty,
+.mensaje:empty{
+    display: none;
+}
+
+/* ---------- 9. Diseño responsivo (tabletas y celulares) ---------- */
+@media (max-width: 1024px){
+    .tarjeta{
+        width: 70%;
+    }
+
+    .tarjeta-ancha{
+        width: 92%;
+    }
+}
+
+@media (max-width: 768px){
+    h1{
+        padding: 15px 10px 5px;
+        font-size: 22px;
+    }
+
+    #menu{
+        justify-content: flex-start;
+        padding: 8px;
+    }
+
+    #menu a{
+        padding: 6px 10px;
+        font-size: 15px;
+    }
+
+    .tarjeta,
+    .tarjeta-ancha{
+        width: 94%;
+        padding: 18px;
+    }
+
+    .tarjeta-ancha input,
+    .tarjeta-ancha select{
+        max-width: none;
+    }
+
+    button{
+        width: 100%;
+        margin-right: 0;
+    }
+
+    td button{
+        width: auto;
+    }
+
+    th,
+    td{
+        padding: 8px;
+        font-size: 14px;
+        white-space: nowrap; /* la tabla se desplaza de lado en vez de partir el texto */
+    }
+}
+
+/* =====================================================================
+   10. Elementos agregados con la estructura PHP
+   ===================================================================== */
+
+/* Enlace del menú de la página actual */
+#menu a.activo{
+    border-bottom-color: var(--amarillo);
+    color: var(--amarillo);
+}
+
+/* Pie de página */
+.pie{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--texto-suave);
+}
+
+.pie p{
+    color: var(--texto-suave);
+}
+
+/* Texto de ayuda pequeño */
+.ayuda{
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: var(--texto-suave);
+}
+
+/* Botón secundario (blanco con borde azul) */
+.boton-secundario{
+    background-color: var(--blanco);
+    color: var(--azul);
+}
+
+.boton-secundario:hover{
+    background-color: var(--azul-claro);
+}
+
+/* Enlace con aspecto de botón */
+a.boton{
+    display: inline-block;
+    margin: 15px 0 0;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background-color: var(--azul);
+    color: var(--blanco);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+a.boton:hover{
+    background-color: var(--azul-oscuro);
+}
+
+/* Encabezado de tarjeta con título a la izquierda y botones a la derecha */
+.tarjeta__encabezado{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.tarjeta__encabezado button,
+.tarjeta__encabezado a.boton{
+    margin: 0 0 0 8px;
+}
+
+h3{
+    margin: 25px 0 10px;
+    color: var(--azul);
+    font-size: 17px;
+}
+
+/* ---------- Reportes ---------- */
+
+/* Filtros en una fila */
+.filtros{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 15px;
+    align-items: end;
+}
+
+.filtros input,
+.filtros select{
+    max-width: none;
+}
+
+.filtros__botones{
+    display: flex;
+    gap: 8px;
+}
+
+.filtros__botones button{
+    margin: 5px 0;
+    white-space: nowrap;
+}
+
+/* Totales del reporte */
+.resumen{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 15px;
+}
+
+.resumen div{
+    padding: 8px 14px;
+    border-left: 4px solid var(--amarillo);
+    border-radius: 6px;
+    background-color: var(--azul-claro);
+}
+
+.resumen dt{
+    font-size: 12px;
+    color: var(--texto-suave);
+}
+
+.resumen dd{
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--azul);
+}
+
+/* Vista del reporte en texto */
+.reporte-texto{
+    margin: 15px 0 0;
+    padding: 15px;
+    overflow-x: auto;
+    border-radius: 6px;
+    background-color: #12163d;
+    color: #e9ebf8;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+/* Columnas numéricas alineadas a la derecha */
+th.num,
+td.num{
+    text-align: right;
+}
+
+/* ---------- Ajustes de DataTables ---------- */
+div.dt-container{
+    margin-top: 5px;
+}
+
+div.dt-container .dt-search input,
+div.dt-container .dt-length select{
+    width: auto;
+    margin: 0 0 0 5px;
+    padding: 6px 10px;
+}
+
+div.dt-container .dt-info,
+div.dt-container .dt-search label,
+div.dt-container .dt-length label{
+    font-size: 13px;
+    color: var(--texto-suave);
+}
+
+div.dt-container .dt-paging .dt-paging-button.current,
+div.dt-container .dt-paging .dt-paging-button.current:hover{
+    border-color: var(--azul);
+    background: var(--azul);
+    color: var(--blanco) !important; /* DataTables usa !important en este color */
+}
+
+/* DataTables alinea a la derecha lo que detecta como número o fecha;
+   aquí solo se alinean a la derecha las columnas con la clase .num */
+table.dataTable th:not(.num),
+table.dataTable td:not(.num){
+    text-align: left;
+}
+
+table.dataTable th:not(.num) div.dt-column-header{
+    flex-direction: row;
+}
+
+/* DataTables pone su propio borde en las tablas; se deja el del contenedor */
+.tabla-contenedor table.dataTable{
+    border: none;
+}
+
+/* La tabla de DataTables va dentro de su propio contenedor */
+.tabla-contenedor:has(.dt-container){
+    padding: 10px;
+}
+
+@media (max-width: 768px){
+    .filtros{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .filtros > div:first-child,
+    .filtros__botones{
+        grid-column: 1 / -1;
+    }
+
+    .filtros__botones{
+        flex-direction: column-reverse;
+    }
+
+    .tarjeta__encabezado button,
+    .tarjeta__encabezado a.boton{
+        width: 100%;
+        margin: 8px 0 0;
+        text-align: center;
+    }
+}
