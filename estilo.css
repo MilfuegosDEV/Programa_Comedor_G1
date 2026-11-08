@@ -1,145 +1,354 @@
+/* =====================================================================
+   Comedores Estudiantiles - Estilos compartidos
+   Se mantienen los mismos nombres de clases e ids que usan las páginas:
+   #menu, .tarjeta, .tarjeta-ancha, .tabla-contenedor, .estado-ok,
+   .estado-alerta, .mensaje, .mensaje.exito y #mensaje.
+   ===================================================================== */
+
+/* ---------- 1. Colores y medidas (cambiar aquí para todo el sitio) ----------
+   Paleta tomada del Campus Virtual de la Universidad Fidélitas */
+:root{
+    --azul-barra: #000f9f;     /* barra superior */
+    --azul: #2b338c;           /* títulos, enlaces y botones */
+    --azul-oscuro: #1f2670;    /* botones al pasar el mouse */
+    --azul-claro: #eaebf4;     /* encabezados de tabla y fondos suaves */
+    --amarillo: #ffc107;       /* acento: menú activo y foco */
+    --amarillo-claro: #fff4d1;
+    --verde: #1e7b46;          /* estado correcto */
+    --rojo: #b42318;           /* alertas y errores */
+    --rojo-claro: #fdecea;
+    --texto: #1f2440;
+    --texto-suave: #5c6584;
+    --borde: #dee2e7;
+    --fondo: #f1f4f5;
+    --blanco: #ffffff;
+    --radio: 8px;
+    --sombra: 0 2px 8px rgba(43, 51, 140, 0.08);
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
 body{
-    font-family: "Roboto", sans-serif;
-    color: black;
-    margin: 15px;
-    padding: 15px;
+    font-family: "Roboto", Arial, sans-serif;
+    color: var(--texto);
+    background-color: var(--fondo);
+    margin: 0;
+    padding: 0 0 40px;
+    line-height: 1.5;
 }
 
 h1{
-    color: darkgreen;
-    font-size: 32px;
+    margin: 0;
+    padding: 20px 15px 10px;
+    background-color: var(--azul-barra);
+    color: var(--blanco);
+    font-size: 28px;
     text-align: center;
 }
 
 h2{
-    color: darkgreen;
-    font-size: 24px;
+    margin: 0 0 15px;
+    color: var(--azul);
+    font-size: 22px;
 }
 
 p{
-    color: black;
+    color: var(--texto);
 }
 
-label{
-    font-size: 16px;
-    color: darkgreen;
-}
-
-input{
-    width: 90%;
-    padding: 8px;
-    margin: 5px;
-    border: 1px solid darkgreen;
-}
-
-button{
-    color: darkgreen;
-    font-size: 16px;
-    padding: 10px;
-    margin: 10px;
-    border: 2px solid darkgreen;
-}
-
-/* Menú de navegación compartido */
+/* ---------- 3. Menú de navegación compartido ---------- */
 #menu{
     display: flex;
     flex-wrap: wrap;
-    border: 2px solid darkgreen;
-    padding: 10px;
-    margin: 15px;
+    justify-content: center;
+    gap: 5px;
+    margin: 0 0 30px;
+    padding: 0 15px;
+    background-color: var(--azul-barra);
+    box-shadow: var(--sombra);
 }
 
 #menu a{
-    color: darkgreen;
-    font-size: 18px;
-    margin: 10px;
+    padding: 12px 14px 10px;
+    border-bottom: 3px solid transparent;
+    color: var(--blanco);
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
 }
 
-/* Tarjeta para formularios y contenido de los módulos */
+/* Subrayado amarillo como en el campus */
+#menu a:hover,
+#menu a:focus{
+    border-bottom-color: var(--amarillo);
+    color: var(--amarillo);
+    outline: none;
+}
+
+/* Último enlace del menú = Cerrar sesión */
+#menu a:last-child{
+    color: #ffd6d3;
+}
+
+/* ---------- 4. Tarjetas (contenedores de cada sección) ---------- */
 .tarjeta{
-    text-align: center;
     width: 40%;
-    border: 1px solid black;
-    margin: 15px;
-    padding: 15px;
+    margin: 0 auto 25px;
+    padding: 25px;
+    background-color: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    text-align: left;
 }
 
-/* Mensajes de validación */
-#mensaje{
-    color: maroon;
-}
-
-/* Diseño responsivo: ajustes para pantallas pequeñas (celulares) */
-@media (max-width: 768px){
-    body{
-        margin: 5px;
-        padding: 5px;
-    }
-
-    h1{
-        font-size: 24px;
-    }
-
-    .tarjeta{
-        width: 90%;
-    }
-}
-
-/* Estilo de módulo de inventario y compras*/
-
-select{
-    width: 90%;
-    padding: 8px;
-    margin: 5px;
-    border: 1px solid darkgreen;
+/* Páginas sin menú (login): separación entre el título y la tarjeta */
+h1 + .tarjeta{
+    margin-top: 40px;
 }
 
 /* Tarjeta más ancha para tablas */
 .tarjeta-ancha{
     width: 90%;
+    max-width: 1200px;
 }
 
+/* En tarjetas anchas los campos no se estiran a todo el ancho */
+.tarjeta-ancha input,
+.tarjeta-ancha select{
+    max-width: 480px;
+}
+
+/* Títulos dentro de una tarjeta que no son el primero (ej. "Productos de la compra") */
+.tarjeta h2:not(:first-child){
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--borde);
+    font-size: 18px;
+}
+
+/* ---------- 5. Formularios ---------- */
+label{
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--azul);
+}
+
+input,
+select{
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px 12px;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    background-color: var(--blanco);
+    color: var(--texto);
+    font-family: inherit;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus{
+    border-color: var(--azul);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--amarillo-claro);
+}
+
+button{
+    margin: 15px 10px 0 0;
+    padding: 10px 20px;
+    border: 1px solid var(--azul);
+    border-radius: 6px;
+    background-color: var(--azul);
+    color: var(--blanco);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: var(--azul-oscuro);
+}
+
+button:focus-visible{
+    outline: 3px solid var(--amarillo);
+    outline-offset: 2px;
+}
+
+/* Botones pequeños dentro de tablas (ej. "Quitar") */
+td button{
+    margin: 0;
+    padding: 5px 12px;
+    border-color: var(--rojo);
+    background-color: var(--blanco);
+    color: var(--rojo);
+    font-size: 14px;
+}
+
+td button:hover{
+    background-color: var(--rojo-claro);
+}
+
+/* ---------- 6. Tablas ---------- */
 .tabla-contenedor{
     overflow-x: auto;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+}
+
+/* Tabla que va después de un botón (ej. detalle de la compra) */
+button ~ .tabla-contenedor{
+    margin-top: 20px;
 }
 
 table{
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
 }
 
-th, td{
-    border: 1px solid darkgreen;
-    padding: 8px;
+.tabla-contenedor + p,
+table + p{
+    margin-top: 15px;
+}
+
+th,
+td{
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--borde);
     text-align: left;
 }
 
 th{
-    background-color: darkgreen;
-    color: white;
+    background-color: var(--azul-claro);
+    color: var(--azul);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+tbody tr:last-child td{
+    border-bottom: none;
+}
+
+tbody tr:nth-child(even){
+    background-color: #f8f9fc;
 }
 
 tbody tr:hover{
-    background-color: #e8f3e8;
+    background-color: var(--amarillo-claro);
 }
 
-/* Estados de inventario */
+/* ---------- 7. Estados y alertas ---------- */
 .estado-ok{
-    color: darkgreen;
+    color: var(--verde);
     font-weight: bold;
 }
 
 .estado-alerta{
-    color: maroon;
+    color: var(--rojo);
     font-weight: bold;
 }
 
-/* Mensajes de validación */
+/* Lista de alertas de inventario */
+#lista-alertas{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#lista-alertas li{
+    margin-bottom: 8px;
+    padding: 10px 14px;
+    border-left: 4px solid var(--verde);
+    border-radius: 6px;
+    background-color: #e7f5ec;
+}
+
+#lista-alertas li.estado-alerta{
+    border-left-color: var(--rojo);
+    background-color: var(--rojo-claro);
+}
+
+/* ---------- 8. Mensajes de validación ---------- */
+#mensaje,
 .mensaje{
-    color: maroon;
+    min-height: 1.5em;
+    margin: 10px 0 0;
+    color: var(--rojo);
+    font-weight: 500;
 }
 
 .mensaje.exito{
-    color: darkgreen;
+    color: var(--verde);
+}
+
+/* Si el mensaje está vacío no ocupa espacio */
+#mensaje:empty,
+.mensaje:empty{
+    display: none;
+}
+
+/* ---------- 9. Diseño responsivo (tabletas y celulares) ---------- */
+@media (max-width: 1024px){
+    .tarjeta{
+        width: 70%;
+    }
+
+    .tarjeta-ancha{
+        width: 92%;
+    }
+}
+
+@media (max-width: 768px){
+    h1{
+        padding: 15px 10px 5px;
+        font-size: 22px;
+    }
+
+    #menu{
+        justify-content: flex-start;
+        padding: 8px;
+    }
+
+    #menu a{
+        padding: 6px 10px;
+        font-size: 15px;
+    }
+
+    .tarjeta,
+    .tarjeta-ancha{
+        width: 94%;
+        padding: 18px;
+    }
+
+    .tarjeta-ancha input,
+    .tarjeta-ancha select{
+        max-width: none;
+    }
+
+    button{
+        width: 100%;
+        margin-right: 0;
+    }
+
+    td button{
+        width: auto;
+    }
+
+    th,
+    td{
+        padding: 8px;
+        font-size: 14px;
+        white-space: nowrap; /* la tabla se desplaza de lado en vez de partir el texto */
+    }
 }
