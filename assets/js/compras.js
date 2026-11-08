@@ -39,7 +39,7 @@ function registrarProveedor(){
     }
 
     if(!/^[0-9]{8}$/.test(telefono)){
-        mostrarMensajeEn("mensaje del proveedor", "El teléfono debe tener exactamente 8 dígitos.", false);
+        mostrarMensajeEn("mensaje-proveedor", "El teléfono debe tener exactamente 8 dígitos.", false);
         return;
     }
 
