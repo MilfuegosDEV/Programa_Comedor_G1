@@ -59,7 +59,7 @@ $(function () {
   $formReporte.on('submit', function (evento) {
     var $desde = $('#desde');
     var $hasta = $('#hasta');
-    if ($desde.val() > $hasta.val()) {
+    if (!$desde.prop('disabled') && $desde.val() > $hasta.val()) {
       evento.preventDefault();
       $hasta[0].setCustomValidity('La fecha "Hasta" debe ser igual o posterior a "Desde".');
       $hasta[0].reportValidity();
@@ -77,11 +77,6 @@ $(function () {
   }
   $('#tipo').on('change', revisarFechas);
   revisarFechas();
-
-  // Antes de enviar se vuelven a habilitar para que viajen en la URL
-  $formReporte.on('submit', function () {
-    $('#desde, #hasta').prop('disabled', false);
-  });
 
   /* ---------- Vista de texto del reporte ---------- */
   $('#btn-ver-texto').on('click', function () {

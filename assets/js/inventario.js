@@ -140,8 +140,9 @@ function registrarMovimiento(){
     }
 
     if(tipo == "Entrada"){
+        let cantidadExistente = item.cantidad_actual;
         item.cantidad_actual = Number((item.cantidad_actual + cantidad).toFixed(2));
-        if(vencimiento != ""){
+        if(vencimiento != "" && (cantidadExistente <= 0 || !item.fecha_vencimiento || vencimiento < item.fecha_vencimiento)){
             item.fecha_vencimiento = vencimiento;
         }
     }else{

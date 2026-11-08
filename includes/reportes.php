@@ -275,14 +275,17 @@ function generarReporte(string $tipo, string $desde, string $hasta): array
     if (!isset(TIPOS_REPORTE[$tipo])) {
         throw new InvalidArgumentException('Tipo de reporte no válido.');
     }
-    if (!fechaValida($desde) || !fechaValida($hasta)) {
-        throw new InvalidArgumentException('Las fechas deben tener el formato AAAA-MM-DD.');
-    }
-    if ($desde > $hasta) {
-        throw new InvalidArgumentException('La fecha "Desde" no puede ser mayor que la fecha "Hasta".');
+    $usaPeriodo = in_array($tipo, ['consumo', 'compras', 'desperdicio'], true);
+    if ($usaPeriodo) {
+        if (!fechaValida($desde) || !fechaValida($hasta)) {
+            throw new InvalidArgumentException('Las fechas deben tener el formato AAAA-MM-DD.');
+        }
+        if ($desde > $hasta) {
+            throw new InvalidArgumentException('La fecha "Desde" no puede ser mayor que la fecha "Hasta".');
+        }
     }
 
-    $periodo = 'Del ' . fechaCorta($desde) . ' al ' . fechaCorta($hasta);
+    $periodo = $usaPeriodo ? 'Del ' . fechaCorta($desde) . ' al ' . fechaCorta($hasta) : null;
 
     switch ($tipo) {
         case 'consumo':
@@ -307,7 +310,7 @@ function generarReporte(string $tipo, string $desde, string $hasta): array
         'titulo'    => TIPOS_REPORTE[$tipo],
         'periodo'   => $periodo,
         'secciones' => $secciones,
-        'archivo'   => 'reporte_' . $tipo . '_' . date('Ymd_His') . '.txt',
+        'archivo'   => 'reporte_' . $tipo . '_' . date('Ymd_His') . '_' . bin2hex(random_bytes(4)) . '.txt',
     ];
 }
 
@@ -387,5 +390,5 @@ function reporteATexto(array $reporte, string $usuario): string
     $lineas[] = centrarTxt('Fin del reporte');
     $lineas[] = lineaTxt('=');
 
-
+    return implode(PHP_EOL, $lineas) . PHP_EOL;
 }
