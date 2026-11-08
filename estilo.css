@@ -84,3 +84,62 @@ button{
         width: 90%;
     }
 }
+
+/* Estilo de módulo de inventario y compras*/
+
+select{
+    width: 90%;
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid darkgreen;
+}
+
+/* Tarjeta más ancha para tablas */
+.tarjeta-ancha{
+    width: 90%;
+}
+
+.tabla-contenedor{
+    overflow-x: auto;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td{
+    border: 1px solid darkgreen;
+    padding: 8px;
+    text-align: left;
+}
+
+th{
+    background-color: darkgreen;
+    color: white;
+}
+
+tbody tr:hover{
+    background-color: #e8f3e8;
+}
+
+/* Estados de inventario */
+.estado-ok{
+    color: darkgreen;
+    font-weight: bold;
+}
+
+.estado-alerta{
+    color: maroon;
+    font-weight: bold;
+}
+
+/* Mensajes de validación */
+.mensaje{
+    color: maroon;
+}
+
+.mensaje.exito{
+    color: darkgreen;
+}
